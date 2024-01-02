@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Meteo">
+			<state id="Umido" />
+			<state id="Secco" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo Stato_terreno</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo Stato_terreno Sensore_guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_reale">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<probabilities>0 1 0</probabilities>
+		</cpt>
+		<cpt id="Posizione_rilevata">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore Posizione_reale</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata</parents>
+		</decision>
+		<utility id="Utilità">
+			<parents>Posizione_reale</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<cpt id="Posizione_reale_1">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale Decisione_azione</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<cpt id="Meteo_1">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Meteo</parents>
+			<probabilities>0.8 0.2 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno_1">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<parents>Stato_terreno</parents>
+			<probabilities>0.9 0.09999999999999998 0.25 0.7499999999999999</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto_1">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo_1 Stato_terreno_1 Sensore_guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 1 0 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore_1">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo_1 Stato_terreno_1 Sensore_guasto_1</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_rilevata_1">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore_1 Posizione_reale_1</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione_1">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata_1 Decisione_azione</parents>
+		</decision>
+		<cpt id="Posizione_reale_2">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale_1 Decisione_azione_1</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<cpt id="Meteo_2">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Meteo_1</parents>
+			<probabilities>0.8 0.2 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno_2">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<parents>Stato_terreno_1</parents>
+			<probabilities>0.9 0.09999999999999998 0.25 0.7499999999999999</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto_2">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo_2 Stato_terreno_2 Sensore_guasto_1</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 1 0 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore_2">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo_2 Stato_terreno_2 Sensore_guasto_2</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_rilevata_2">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore_2 Posizione_reale_2</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione_2">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata_2 Decisione_azione_1</parents>
+		</decision>
+		<cpt id="Posizione_reale_3">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale_2 Decisione_azione_2</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<cpt id="Meteo_3">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Meteo_2</parents>
+			<probabilities>0.8 0.2 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno_3">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<parents>Stato_terreno_2</parents>
+			<probabilities>0.9 0.09999999999999998 0.25 0.7499999999999999</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto_3">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo_3 Stato_terreno_3 Sensore_guasto_2</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 1 0 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore_3">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo_3 Stato_terreno_3 Sensore_guasto_3</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_rilevata_3">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore_3 Posizione_reale_3</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione_3">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata_3 Decisione_azione_2</parents>
+		</decision>
+		<cpt id="Posizione_reale_4">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale_3 Decisione_azione_3</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<cpt id="Meteo_4">
+			<state id="Umido" />
+			<state id="Secco" />
+			<parents>Meteo_3</parents>
+			<probabilities>0.8 0.2 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno_4">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<parents>Stato_terreno_3</parents>
+			<probabilities>0.9 0.09999999999999998 0.25 0.7499999999999999</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto_4">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo_4 Stato_terreno_4 Sensore_guasto_3</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 1 0 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore_4">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo_4 Stato_terreno_4 Sensore_guasto_4</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_rilevata_4">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore_4 Posizione_reale_4</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione_4">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata_4 Decisione_azione_3</parents>
+		</decision>
+		<cpt id="Posizione_finale">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale_4 Decisione_azione_4</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<utility id="Ut_finale">
+			<parents>Posizione_finale</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<utility id="Utilità_1">
+			<parents>Posizione_reale_1</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<utility id="Utilità_2">
+			<parents>Posizione_reale_2</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<utility id="Utilità_3">
+			<parents>Posizione_reale_3</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<utility id="Utilità_4">
+			<parents>Posizione_reale_4</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.1.3402.0 ACADEMIC" name="Network1 unrolled">
+			<node id="Meteo">
+				<name>Meteo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>202 129 276 175</position>
+				<barchart active="true" />
+			</node>
+			<node id="Stato_terreno">
+				<name>Stato terreno</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>470 147 545 193</position>
+				<barchart active="true" />
+			</node>
+			<node id="Sensore_guasto">
+				<name>Sensore guasto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>342 55 430 110</position>
+				<barchart active="true" />
+			</node>
+			<node id="Accuratezza_sensore">
+				<name>Accuratezza sensore</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>305 223 392 277</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_reale">
+				<name>Posizione reale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>292 452 376 504</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_rilevata">
+				<name>Posizione rilevata</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>362 326 457 385</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Decisione_azione">
+				<name>Decisione azione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>197 386 291 422</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Utilità">
+				<name>Utilità</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>450 487 517 536</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_finale">
+				<name>Posizione finale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2803 350 2889 403</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Ut_finale">
+				<name>Ut finale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2818 469 2877 501</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<textbox>
+				<caption>Step0</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>273 561 297 573</position>
+			</textbox>
+			<textbox>
+				<caption>Step1</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>802 561 826 573</position>
+			</textbox>
+			<textbox>
+				<caption>Step2</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>1331 561 1355 573</position>
+			</textbox>
+			<textbox>
+				<caption>Step3</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>1860 561 1884 573</position>
+			</textbox>
+			<textbox>
+				<caption>Step4</caption>
+				<font color="696969" name="Arial" size="7" />
+				<position>2389 561 2413 573</position>
+			</textbox>
+			<node id="Meteo_1">
+				<name>Meteo (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>731 149 805 195</position>
+				<barchart active="true" />
+			</node>
+			<node id="Stato_terreno_1">
+				<name>Stato terreno (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>999 167 1074 213</position>
+				<barchart active="true" />
+			</node>
+			<node id="Sensore_guasto_1">
+				<name>Sensore guasto (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>871 75 959 130</position>
+				<barchart active="true" />
+			</node>
+			<node id="Accuratezza_sensore_1">
+				<name>Accuratezza sensore (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>834 243 921 297</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_reale_1">
+				<name>Posizione reale (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>821 472 905 524</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_rilevata_1">
+				<name>Posizione rilevata (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>891 346 986 405</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Decisione_azione_1">
+				<name>Decisione azione (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>726 406 820 442</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Utilità_1">
+				<name>Utilità (t=1)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>979 507 1046 556</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Meteo_2">
+				<name>Meteo (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1260 129 1334 175</position>
+				<barchart active="true" />
+			</node>
+			<node id="Stato_terreno_2">
+				<name>Stato terreno (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1528 147 1603 193</position>
+				<barchart active="true" />
+			</node>
+			<node id="Sensore_guasto_2">
+				<name>Sensore guasto (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1400 55 1488 110</position>
+				<barchart active="true" />
+			</node>
+			<node id="Accuratezza_sensore_2">
+				<name>Accuratezza sensore (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1363 223 1450 277</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_reale_2">
+				<name>Posizione reale (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1350 452 1434 504</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_rilevata_2">
+				<name>Posizione rilevata (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1420 326 1515 385</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Decisione_azione_2">
+				<name>Decisione azione (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1255 386 1349 422</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Utilità_2">
+				<name>Utilità (t=2)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1507 488 1574 537</position>
+				<barchart active="true" width="127" height="67" />
+			</node>
+			<node id="Meteo_3">
+				<name>Meteo (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1789 149 1863 195</position>
+				<barchart active="true" />
+			</node>
+			<node id="Stato_terreno_3">
+				<name>Stato terreno (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2057 167 2132 213</position>
+				<barchart active="true" />
+			</node>
+			<node id="Sensore_guasto_3">
+				<name>Sensore guasto (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1929 75 2017 130</position>
+				<barchart active="true" />
+			</node>
+			<node id="Accuratezza_sensore_3">
+				<name>Accuratezza sensore (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1892 243 1979 297</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_reale_3">
+				<name>Posizione reale (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1879 472 1963 524</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_rilevata_3">
+				<name>Posizione rilevata (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1949 346 2044 405</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Decisione_azione_3">
+				<name>Decisione azione (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1784 406 1878 442</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Utilità_3">
+				<name>Utilità (t=3)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2037 507 2104 556</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Meteo_4">
+				<name>Meteo (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2318 129 2392 175</position>
+				<barchart active="true" />
+			</node>
+			<node id="Stato_terreno_4">
+				<name>Stato terreno (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2586 147 2661 193</position>
+				<barchart active="true" />
+			</node>
+			<node id="Sensore_guasto_4">
+				<name>Sensore guasto (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2458 55 2546 110</position>
+				<barchart active="true" />
+			</node>
+			<node id="Accuratezza_sensore_4">
+				<name>Accuratezza sensore (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2421 223 2508 277</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_reale_4">
+				<name>Posizione reale (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2408 452 2492 504</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Posizione_rilevata_4">
+				<name>Posizione rilevata (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2478 326 2573 385</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Decisione_azione_4">
+				<name>Decisione azione (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2313 386 2407 422</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="Utilità_4">
+				<name>Utilità (t=4)</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>2566 487 2633 536</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+		</genie>
+	</extensions>
+</smile>

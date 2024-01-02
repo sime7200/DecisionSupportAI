@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Meteo" dynamic="plate">
+			<state id="Umido" />
+			<state id="Secco" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno" dynamic="plate">
+			<state id="Sconnesso" />
+			<state id="Lineare" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto" dynamic="plate">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo Stato_terreno</parents>
+			<strengths>0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<noisymax id="Accuratezza_sensore" dynamic="plate">
+			<state id="Pessima" />
+			<state id="Buona" />
+			<state id="Ottima" />
+			<parents>Meteo Stato_terreno Sensore_guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.2999999999999999 0.1500000000000001 0.5499999999999999 0 0 1 0.5999999999999999 0.3 0.1000000000000001 0 0 1 1 0 0 0 0 1 0.01000000000000001 0.04000000000000004 0.95</parameters>
+		</noisymax>
+		<cpt id="Posizione_reale" dynamic="plate">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<probabilities>0 1 0</probabilities>
+		</cpt>
+		<cpt id="Posizione_rilevata" dynamic="plate">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore Posizione_reale</parents>
+			<probabilities>0.35 0.325 0.325 0.325 0.35 0.325 0.325 0.325 0.35 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.99 0.005 0.005 0.005 0.99 0.005 0.005 0.005 0.99</probabilities>
+		</cpt>
+		<decision id="Decisione_azione" dynamic="plate">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata</parents>
+		</decision>
+		<utility id="Utilità" dynamic="plate">
+			<parents>Posizione_reale</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+		<cpt id="Posizione_finale" dynamic="terminal">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Posizione_reale Decisione_azione</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<utility id="Ut_finale" dynamic="terminal">
+			<parents>Posizione_finale</parents>
+			<utilities>-1 1 -1</utilities>
+		</utility>
+	</nodes>
+	<dynamic numslices="5">
+		<cpt id="Meteo" order="1">
+			<parents>Meteo</parents>
+			<probabilities>0.8 0.2 0.4 0.6</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno" order="1">
+			<parents>Stato_terreno</parents>
+			<probabilities>0.9 0.09999999999999998 0.25 0.7499999999999999</probabilities>
+		</cpt>
+		<noisymax id="Sensore_guasto" order="1">
+			<parents>Sensore_guasto</parents>
+			<strengths>0 1 0 1 0 1</strengths>
+			<parameters>0.1 0.8999999999999999 0 1 0.5 0.5 0 1 1 0 0 1 0.001 0.999</parameters>
+		</noisymax>
+		<cpt id="Posizione_reale" order="1">
+			<parents>Posizione_reale Decisione_azione</parents>
+			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
+		</cpt>
+	</dynamic>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.1.3402.0 ACADEMIC" name="Network1">
+			<plate leftwidth="120" rightwidth="120">19 19 788 572</plate>
+			<node id="Accuratezza_sensore">
+				<name>Accuratezza sensore</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>305 223 392 277</position>
+			</node>
+			<node id="Meteo">
+				<name>Meteo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>202 129 276 175</position>
+			</node>
+			<node id="Stato_terreno">
+				<name>Stato terreno</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>470 147 545 193</position>
+			</node>
+			<node id="Posizione_rilevata">
+				<name>Posizione rilevata</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>362 326 457 385</position>
+			</node>
+			<node id="Posizione_reale">
+				<name>Posizione reale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>292 452 376 504</position>
+			</node>
+			<node id="Sensore_guasto">
+				<name>Sensore guasto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>342 55 430 110</position>
+			</node>
+			<node id="Decisione_azione">
+				<name>Decisione azione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>197 386 291 422</position>
+			</node>
+			<node id="Utilità">
+				<name>Utilità</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>450 487 517 536</position>
+			</node>
+			<node id="Ut_finale">
+				<name>Ut finale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>702 469 761 501</position>
+			</node>
+			<node id="Posizione_finale">
+				<name>Posizione finale</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>687 350 773 403</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>

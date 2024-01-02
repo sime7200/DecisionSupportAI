@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="Meteo">
+			<state id="Umido" />
+			<state id="Secco" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Stato_terreno">
+			<state id="Sconnesso" />
+			<state id="Regolare" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Guasto_sensore">
+			<state id="Si" />
+			<state id="No" />
+			<parents>Meteo Stato_terreno</parents>
+			<probabilities>0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Accuratezza_sensore">
+			<state id="Ottima" />
+			<state id="Buona" />
+			<state id="Pessima" />
+			<parents>Meteo Stato_terreno Guasto_sensore</parents>
+			<probabilities>0 0 1 0.1 0.3 0.6 0 0 1 0.55 0.15 0.2999999999999999 0 0 1 0.1 0.3 0.6 0 0 1 0.3333333333333333 0.3333333333333333 0.3333333333333334</probabilities>
+		</cpt>
+		<cpt id="Posizione_veicolo">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<probabilities>0.3333333333333333 0.3333333333333333 0.3333333333333334</probabilities>
+		</cpt>
+		<cpt id="Posizione_rilevata">
+			<state id="Left" />
+			<state id="Center" />
+			<state id="Right" />
+			<parents>Accuratezza_sensore Posizione_veicolo</parents>
+			<probabilities>0.99 0.01 0 0 0.99 0.01 0.01 0 0.99 0.9 0.1 0 0 0.9 0.1 0 0.1 0.9 0.35 0.65 0 0 0.35 0.65 0.65 0 0.35</probabilities>
+		</cpt>
+		<decision id="Decisione_azione">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Posizione_rilevata</parents>
+		</decision>
+		<cpt id="Azione">
+			<state id="Left" />
+			<state id="Stay" />
+			<state id="Right" />
+			<parents>Decisione_azione</parents>
+			<probabilities>0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9</probabilities>
+		</cpt>
+		<utility id="Utilità">
+			<parents>Azione</parents>
+			<utilities>1 1 1</utilities>
+		</utility>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.1.3402.0 ACADEMIC" name="Network1">
+			<node id="Accuratezza_sensore">
+				<name>Accuratezza sensore</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>330 230 417 284</position>
+			</node>
+			<node id="Azione">
+				<name>Azione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>197 463 263 508</position>
+			</node>
+			<node id="Decisione_azione">
+				<name>Decisione azione</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>184 362 278 407</position>
+			</node>
+			<node id="Posizione_veicolo">
+				<name>Posizione veicolo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>350 494 443 552</position>
+			</node>
+			<node id="Posizione_rilevata">
+				<name>Posizione rilevata</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>343 356 451 423</position>
+			</node>
+			<node id="Meteo">
+				<name>Meteo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>169 146 239 191</position>
+			</node>
+			<node id="Stato_terreno">
+				<name>Stato terreno</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>470 130 545 176</position>
+			</node>
+			<node id="Guasto_sensore">
+				<name>Guasto sensore</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>314 116 403 171</position>
+			</node>
+			<node id="Utilità">
+				<name>Utilità</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>69 467 139 515</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
