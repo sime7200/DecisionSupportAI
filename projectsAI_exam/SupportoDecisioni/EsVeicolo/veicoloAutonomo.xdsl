@@ -80,6 +80,9 @@
 			<parents>Posizione_reale Decisione_azione</parents>
 			<probabilities>0.9 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.9 0.05 0.05 0.05 0.9 0.05 0.05 0.9</probabilities>
 		</cpt>
+		<decision id="Decisione_azione" order="1">
+			<parents>Decisione_azione</parents>
+		</decision>
 	</dynamic>
 	<extensions>
 		<genie version="1.0" app="GeNIe 4.1.3402.0 ACADEMIC" name="Network1">

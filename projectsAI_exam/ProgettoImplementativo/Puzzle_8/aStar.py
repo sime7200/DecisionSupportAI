@@ -1,9 +1,11 @@
 import numpy as np
 import heapq
 
-currentState = np.array([0,1,2,3,7,5,4,6,8])
+#currentState = np.array([0,1,2,3,7,5,4,6,8])
+#currentState = np.array([4,3,5,0,1,8,7,2,6])
+currentState = np.array([0,5,6,4,2,7,8,1,3])
 currentMatrix = currentState.reshape(3, 3)
-goalState = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8])
+goalState = np.array([0,1,2,3,4,5,6,7,8])
 goalMatrix = goalState.reshape(3, 3)
 
 
@@ -90,7 +92,7 @@ def aStar(initialState, goalState, heuristic=h):
         currentState = np.array(currentState)
 
         if np.array_equal(currentState, goalState):
-            print("Ancora da aprire:", len(nodiScoperti), "Chiusi:", len(nodiChiusi))
+            #print("Ancora da aprire:", len(nodiScoperti), "Chiusi:", len(nodiChiusi))
             return reconstructPath(currentTuple)
 
         currentStateTuple = tuple(currentState)

@@ -2,7 +2,6 @@ import pysmile
 import pysmile_license
 import random
 
-
 def topological_order(net):
     visited = set()
     order = []
@@ -23,6 +22,7 @@ def topological_order(net):
 
     return order
 
+
 # per trovare l'indice della colonna giusta
 def get_first_index(net, node, probabilities, single_sample):
     init = 0
@@ -33,7 +33,7 @@ def get_first_index(net, node, probabilities, single_sample):
     for parent in parents:
         lenght = lenght / net.get_outcome_count(parent) # prima divisione per 2, l'altra per 3 perchè 3 outcome
         outcome = net.get_outcome_ids(parent).index(single_sample[parent]) # prendo l'indice del nome della colonna in quel campione
-        print(outcome, single_sample[parent])
+        #print(outcome, single_sample[parent])
         init = init + (lenght * outcome)
 
     return int(init)
@@ -80,7 +80,7 @@ def likelihood_weighting(network, evidence, varX, num_run):
 network_file = "Likelihood_weighting/WetGrass.xdsl"
 evidence = {'Sprinkler': 'On'}
 var = "Rain"
-num_run = 5
+num_run = 2000
 
 result = likelihood_weighting(network_file, evidence, var, num_run)
 print(f"P({var} | 'Sprinkler': 'On'): {result}")
